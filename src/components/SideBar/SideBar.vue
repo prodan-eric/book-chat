@@ -19,7 +19,7 @@ import { Book } from '../../interfaces';
 <style>
 .book-section{
    padding: 20px 5px;
-   width: 100px;
+   width: 120px;
 }
 .book-section:hover{
     background-color: lightblue;

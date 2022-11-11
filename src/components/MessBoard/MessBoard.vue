@@ -1,30 +1,28 @@
 <script lang="ts" setup>
-import {PropType} from 'vue';
-import {User} from '../../interfaces'
-const props = defineProps({
-    user: Object as PropType<User>,
-    currentBookChat: String
-})
+import { useBookChatStore } from '../../store'
+const store = useBookChatStore()
 </script>
 
 <template>
     <div class="message-board">
         <div class="board-top-bar">
-          {{currentBookChat}}
+          {{store.currentBookChat}}
         </div>
         <div class="messages">
-           <div class="message">
+          <!-- this is one message -->
+           <div class="message" v-for="a in 10">
             <div class="top-bar">
                  <p class="sent-by">ieronim</p>
                  <p class="sent-at">14:25</p>
             </div>
             <div class="content">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam et harum nulla.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, saepe, mollitia exercitationem optio natus error itaque, iusto ut quibusdam nam iure officia doloribus culpa. Mollitia quisquam minima recusandae aperiam facere.</p>
             </div>
            </div> 
+           <!-- this is one message -->
         </div>
         <div class="typing-box">
-          <input class="message-input" :placeholder="`type something, ${user?.username}`"/>
+          <input class="message-input" :placeholder="`type something, ${store.user.username}`"/>
         </div>
     </div>
 </template>
@@ -41,6 +39,10 @@ const props = defineProps({
     font-size: 18px;
 }
 
+.sent-at{
+    margin-right: 10px;
+}
+
 .top-bar{
     display: flex;
     justify-content: space-between;
@@ -55,15 +57,22 @@ const props = defineProps({
     padding: 5px 0px;
 }
 
+.messages{
+    margin-top: 10px;
+    height: 400px;
+    overflow: auto;
+}
+
 .message-board{
    height: 500px; 
-   width: 500px;
+   width: 100%;
    position: relative;
-   margin: auto;
+   display: grid;
+   justify-content: center;
 }
 
 .typing-box{
-    position: absolute;
+
     bottom: 10px;
 }
 
