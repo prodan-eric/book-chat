@@ -2,17 +2,21 @@
 import {PropType} from 'vue';
 import {User} from '../../interfaces'
 const props = defineProps({
-    user: Object as PropType<User>
+    user: Object as PropType<User>,
+    currentBookChat: String
 })
 </script>
 
 <template>
     <div class="message-board">
+        <div class="board-top-bar">
+          {{currentBookChat}}
+        </div>
         <div class="messages">
            <div class="message">
             <div class="top-bar">
-                 <p>ieronim</p>
-                 <p>14:25</p>
+                 <p class="sent-by">ieronim</p>
+                 <p class="sent-at">14:25</p>
             </div>
             <div class="content">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam et harum nulla.</p>
@@ -26,6 +30,16 @@ const props = defineProps({
 </template>
 
 <style>
+.board-top-bar{
+    text-align: center;
+    font-family: monospace;
+    outline: solid black 1px;
+    border-radius: 3px;
+}
+
+.sent-by{
+    font-size: 18px;
+}
 
 .top-bar{
     display: flex;
@@ -33,7 +47,7 @@ const props = defineProps({
     font-size: 15px;
 }
 .content{
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .content p{

@@ -9,7 +9,8 @@ import { Book } from '../../interfaces';
 <template>
   <div class="side-bar">
     <div class="book-section"
-     v-for="book in books">
+     v-for="book in books"
+     @click="$emit('book-chat-select', $event)">
      {{book.title}}
     </div>
   </div>

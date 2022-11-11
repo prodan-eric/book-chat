@@ -6,7 +6,8 @@ import { User } from './interfaces'
 const user = ref<User>({
     id: 'F1R9tkmgDaS5xxydpYG4',
     username: 'ieronim',
-    password: '123'
+    password: '123',
+    currentBookChat: 'Ulysses'
 })
 
 </script>
