@@ -1,15 +1,14 @@
 <script lang="ts" setup>
-import { PropType } from 'vue';
-import { Book } from '../../interfaces';
-  const props = defineProps({
-    books:  Array as PropType<Book[]>
-  })
+import { useBookChatStore } from '../../store'
+
+const store = useBookChatStore()
+
 </script>
 
 <template>
   <div class="side-bar">
     <div class="book-section"
-     v-for="book in books"
+     v-for="book in store.userBooks"
      @click="$emit('book-chat-select', $event)">
      {{book.title}}
     </div>

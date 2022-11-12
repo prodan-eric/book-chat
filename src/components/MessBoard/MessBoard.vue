@@ -1,6 +1,17 @@
 <script lang="ts" setup>
 import { useBookChatStore } from '../../store'
+import { ref, watch } from 'vue'
+import fetchMessages from '../../firebase/fetch-functions/fetchMessages'
+import { Message } from '../../interfaces';
+
 const store = useBookChatStore()
+
+const messages  = ref<Message[]>([])
+
+watch(()=>store.currentBookChat, async ()=>{
+   messages.value = await fetchMessages()
+})
+
 </script>
 
 <template>
@@ -10,13 +21,13 @@ const store = useBookChatStore()
         </div>
         <div class="messages">
           <!-- this is one message -->
-           <div class="message" v-for="a in 10">
+           <div class="message" v-for="message in messages">
             <div class="top-bar">
-                 <p class="sent-by">ieronim</p>
-                 <p class="sent-at">14:25</p>
+                 <p class="sent-by">{{message.sentBy}}</p>
+                 <p class="sent-at">{{message.sentAt}}</p>
             </div>
             <div class="content">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, saepe, mollitia exercitationem optio natus error itaque, iusto ut quibusdam nam iure officia doloribus culpa. Mollitia quisquam minima recusandae aperiam facere.</p>
+                <p>{{message.text}}</p>
             </div>
            </div> 
            <!-- this is one message -->
@@ -61,6 +72,12 @@ const store = useBookChatStore()
     margin-top: 10px;
     height: 400px;
     overflow: auto;
+}
+.messsage{
+    border-radius: 5px;
+}
+.message:hover{
+  background-color: lightgray;
 }
 
 .message-board{

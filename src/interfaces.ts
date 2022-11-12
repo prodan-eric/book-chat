@@ -1,3 +1,4 @@
+import { DocumentReference } from "firebase/firestore"
 
 export interface Book {
   id: string
@@ -12,5 +13,14 @@ export interface User {
   username: string,
   password: string,
   currentBookChat: string
-  //books: Book[],
+}
+
+export interface DbUser extends User {
+  books: DocumentReference<Book>[]
+}
+
+export interface Message {
+  text: string,
+  sentBy: string,
+  sentAt: Date
 }
