@@ -24,5 +24,18 @@ export const useBookChatStore = defineStore('bookChat', () => {
         currentBookChat.value = val
     }
 
-    return {user, currentBookChat, userBooks, currentBookChatID, setCurrentBookChat}
+    const currentMessage = ref('')
+
+    const setCurrentMessage = (val: string) => {
+        currentMessage.value = val
+    }
+
+    const lastMessage = ref('')
+
+    const setLasttMessage = (val: string) => {
+        lastMessage.value = val
+    }
+
+    return {user, currentBookChat, userBooks, currentBookChatID, currentMessage, lastMessage,
+            setCurrentBookChat, setCurrentMessage, setLasttMessage}
   })

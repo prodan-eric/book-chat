@@ -1,4 +1,4 @@
-import { DocumentReference } from "firebase/firestore"
+import { DocumentReference, Timestamp } from "firebase/firestore"
 
 export interface Book {
   id: string
@@ -22,5 +22,5 @@ export interface DbUser extends User {
 export interface Message {
   text: string,
   sentBy: string,
-  sentAt: Date
+  sentAt: Timestamp
 }

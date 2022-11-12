@@ -1,16 +1,39 @@
 <script lang="ts" setup>
 import { useBookChatStore } from '../../store'
 import { ref, watch } from 'vue'
+import {getFormattedDate} from '../../utils'
 import fetchMessages from '../../firebase/fetch-functions/fetchMessages'
-import { Message } from '../../interfaces';
+import postMessage from '../../firebase/create-functions/postMessage'
+import onMessageAdded from '../../firebase/listener-functions/onMessageAdded'
+import { Message } from '../../interfaces'
+import { Timestamp } from '@firebase/firestore'
+
+let unsubscribe: Function
 
 const store = useBookChatStore()
-
+const messagesEl = ref<HTMLElement>()
 const messages  = ref<Message[]>([])
 
+const scrollToBottom = () => messagesEl.value!.scrollTop = messagesEl.value!.scrollHeight
+
 watch(()=>store.currentBookChat, async ()=>{
+   if(unsubscribe) unsubscribe()
    messages.value = await fetchMessages()
+   unsubscribe =  await onMessageAdded()
+   scrollToBottom()
 })
+
+watch(()=>store.lastMessage, (val)=>{
+    messages.value.push({
+        text: val,
+        sentAt: Timestamp.now(),
+        sentBy: store.user.username
+    })  
+})
+
+const addMesssage = () => {
+   postMessage(store.currentMessage)
+}
 
 </script>
 
@@ -19,12 +42,12 @@ watch(()=>store.currentBookChat, async ()=>{
         <div class="board-top-bar">
           {{store.currentBookChat}}
         </div>
-        <div class="messages">
+        <div class="messages" ref="messagesEl">
           <!-- this is one message -->
            <div class="message" v-for="message in messages">
             <div class="top-bar">
                  <p class="sent-by">{{message.sentBy}}</p>
-                 <p class="sent-at">{{message.sentAt}}</p>
+                 <p class="sent-at">{{getFormattedDate(message.sentAt)}}</p>
             </div>
             <div class="content">
                 <p>{{message.text}}</p>
@@ -32,9 +55,11 @@ watch(()=>store.currentBookChat, async ()=>{
            </div> 
            <!-- this is one message -->
         </div>
-        <div class="typing-box">
-          <input class="message-input" :placeholder="`type something, ${store.user.username}`"/>
-        </div>
+        <form class="typing-box" @submit.prevent="addMesssage">
+          <input class="message-input" 
+                 v-model="store.currentMessage"
+                 :placeholder="`type something, ${store.user.username}`"/>
+        </form>
     </div>
 </template>
 
@@ -89,8 +114,11 @@ watch(()=>store.currentBookChat, async ()=>{
 }
 
 .typing-box{
-
     bottom: 10px;
+}
+
+.typing-box input{
+    height: 40px;
 }
 
 .message-input{

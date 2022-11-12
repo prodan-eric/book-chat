@@ -1,4 +1,4 @@
-import { collection, query, getDocs, limit} from "firebase/firestore"
+import { collection, query, getDocs, limit, orderBy} from "firebase/firestore"
 import { db } from '..'
 import { Message } from "../../interfaces"
 import { useBookChatStore } from "../../store"
@@ -6,7 +6,7 @@ import { useBookChatStore } from "../../store"
 export default async () => {
     const store = useBookChatStore()
 
-    const q = query(collection(db, `chats/${store.currentBookChatID}/messages`), limit(100))
+    const q = query(collection(db, `chats/${store.currentBookChatID}/messages`), orderBy('sentAt', 'desc') ,limit(10))
     const querySnapshot = await getDocs(q)
     let messages: Message[] = []
     querySnapshot.forEach((doc) => {
@@ -17,6 +17,6 @@ export default async () => {
         sentBy: messageData.sentBy
       })
     })
-    return messages
+    return messages.reverse()
 }
 
