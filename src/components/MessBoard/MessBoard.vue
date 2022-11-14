@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useBookChatStore } from '../../store'
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
+import fetchUserBooks from '../../firebase/fetch-functions/fetchUserBooks'
 import {getFormattedDate} from '../../utils'
 import fetchMessages from '../../firebase/fetch-functions/fetchMessages'
 import postMessage from '../../firebase/create-functions/postMessage'
@@ -13,6 +14,14 @@ const store = useBookChatStore()
 const messagesEl = ref<HTMLElement>()
 
 const scrollToBottom = () => messagesEl.value!.scrollTop = messagesEl.value!.scrollHeight
+
+
+onMounted(async ()=>{
+    if(store.user) {
+        store.userBooks = await fetchUserBooks()
+        store.setCurrentBookChat(store.user.currentBookChat)
+    }
+})
 
 watch(()=>store.currentBookChat, async ()=>{
    if(unsubscribe) unsubscribe()
