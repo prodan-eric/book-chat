@@ -1,5 +1,5 @@
 import {defineStore} from 'pinia'
-import { User, Book } from '../interfaces'
+import { User, Book, Message } from '../interfaces'
 import {computed, ref} from 'vue'
 
 export const useBookChatStore = defineStore('bookChat', () => {
@@ -12,11 +12,21 @@ export const useBookChatStore = defineStore('bookChat', () => {
 
     const userBooks = ref<Book[]>([])
 
+    const messages  = ref<Message[]>([])
+
     const currentBookChatID = computed(()=>{
         return userBooks.value[
             userBooks.value.findIndex((book)=>book.title===currentBookChat.value)
         ].id
     })
+
+    const pushMessage = (mess: Message) => {
+      messages.value.push(mess)
+    }
+
+    const setMessages = (newMessages: Message[]) =>{
+        messages.value = newMessages
+    }
 
     const currentBookChat = ref('')
 
@@ -26,16 +36,11 @@ export const useBookChatStore = defineStore('bookChat', () => {
 
     const currentMessage = ref('')
 
+
     const setCurrentMessage = (val: string) => {
         currentMessage.value = val
     }
 
-    const lastMessage = ref('')
-
-    const setLasttMessage = (val: string) => {
-        lastMessage.value = val
-    }
-
-    return {user, currentBookChat, userBooks, currentBookChatID, currentMessage, lastMessage,
-            setCurrentBookChat, setCurrentMessage, setLasttMessage}
+    return {user, currentBookChat, userBooks, currentBookChatID, currentMessage, messages,
+            setCurrentBookChat, setCurrentMessage, setMessages, pushMessage}
   })

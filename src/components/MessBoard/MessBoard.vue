@@ -5,34 +5,30 @@ import {getFormattedDate} from '../../utils'
 import fetchMessages from '../../firebase/fetch-functions/fetchMessages'
 import postMessage from '../../firebase/create-functions/postMessage'
 import onMessageAdded from '../../firebase/listener-functions/onMessageAdded'
-import { Message } from '../../interfaces'
 import { Timestamp } from '@firebase/firestore'
 
 let unsubscribe: Function
 
 const store = useBookChatStore()
 const messagesEl = ref<HTMLElement>()
-const messages  = ref<Message[]>([])
 
 const scrollToBottom = () => messagesEl.value!.scrollTop = messagesEl.value!.scrollHeight
 
 watch(()=>store.currentBookChat, async ()=>{
    if(unsubscribe) unsubscribe()
-   messages.value = await fetchMessages()
+   store.messages = await fetchMessages()
    unsubscribe =  await onMessageAdded()
    scrollToBottom()
 })
 
-watch(()=>store.lastMessage, (val)=>{
-    messages.value.push({
-        text: val,
-        sentAt: Timestamp.now(),
-        sentBy: store.user.username
-    })  
-})
-
 const addMesssage = () => {
    postMessage(store.currentMessage)
+   store.messages.push({
+        text: store.currentMessage,
+        sentAt: Timestamp.now(),
+        sentBy: store.user.username
+    })
+    store.setCurrentMessage('')
 }
 
 </script>
@@ -44,7 +40,7 @@ const addMesssage = () => {
         </div>
         <div class="messages" ref="messagesEl">
           <!-- this is one message -->
-           <div class="message" v-for="message in messages">
+           <div class="message" v-for="message in store.messages">
             <div class="top-bar">
                  <p class="sent-by">{{message.sentBy}}</p>
                  <p class="sent-at">{{getFormattedDate(message.sentAt)}}</p>
