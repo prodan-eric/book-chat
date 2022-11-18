@@ -4,7 +4,7 @@ import {computed, ref} from 'vue'
 
 export const useBookChatStore = defineStore('bookChat', () => {
     const user = ref<User>({
-        id: 'F1R9tkmgDaS5xxydpYG4',
+        id: '',
         username: 'ieronim',
         currentBookChat: 'Ulysses'
     })

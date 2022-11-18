@@ -16,6 +16,11 @@ const attemptRegister = () =>{
      <input placeholder="E-Mail" v-model="email"/>
      <input placeholder="Username" v-model="username"/>
      <input placeholder="Password" v-model="password"/>
-     <input type="submit" value="Submit"/>
+     <input type="submit" value="Register"/>
+     <router-link to="/" class="link">Sign In</router-link>
   </form>
 </template>
+
+<style>
+@import '../assets/formStyles.css';
+</style>

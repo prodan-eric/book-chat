@@ -1,0 +1,28 @@
+form {
+    display: grid;
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+input {
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+label:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link{
+  text-decoration: none;
+  text-align: center;
+  font-size: 20px; 
+  color: rgb(101, 169, 192); 
+}
+.link:hover{
+   text-decoration: underline;
+   cursor: pointer;
+}
+

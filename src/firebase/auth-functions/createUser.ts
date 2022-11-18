@@ -1,7 +1,7 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import postUser from '../create-functions/postUser'
 
-export default async (email: string, username: string, password: string) => {
+export default (email: string, username: string, password: string) => {
     const auth = getAuth()   
     createUserWithEmailAndPassword(auth, email, password)
      .then((userCredential) => {
