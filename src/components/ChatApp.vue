@@ -10,13 +10,19 @@ const store = useBookChatStore()
         <SideBar/>
         <MessBoard/>
     </div> 
-    <div v-else>
-        <router-link to="/">Sign In First</router-link>
+    <div class="link-wrapper" v-else>
+        <router-link class="link" to="/">Sign In First</router-link>
     </div> 
 </template>
 
-<style>
+<style scoped>
 .chat-app{
     display: flex;
 }
+
+.link-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
 </style>

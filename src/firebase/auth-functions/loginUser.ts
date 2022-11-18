@@ -1,10 +1,10 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useBookChatStore } from "../../store";
 
-export default (email: string, password: string) => {
+export default async (email: string, password: string) => {
     const store = useBookChatStore()
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
+    await signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;   
         store.user.id = user.uid

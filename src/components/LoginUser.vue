@@ -8,7 +8,7 @@ const password = ref()
 const router = useRouter()
 
 const attemptLogin = async () =>{
-  loginUser(email.value, password.value)
+  await loginUser(email.value, password.value)
   router.push({ path: '/chat' })
 }
 </script>
