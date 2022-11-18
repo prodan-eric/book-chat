@@ -12,7 +12,8 @@ export interface User {
   id: string,
   username: string,
   password: string,
-  currentBookChat: string
+  currentBookChat: string,
+  email: string
 }
 
 export interface DbUser extends User {

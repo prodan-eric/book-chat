@@ -6,9 +6,14 @@ export const useBookChatStore = defineStore('bookChat', () => {
     const user = ref<User>({
         id: 'F1R9tkmgDaS5xxydpYG4',
         username: 'ieronim',
-        password: '123',
         currentBookChat: 'Ulysses'
     })
+
+    const isLoggedIn = ref(false)
+
+    const login = () => {
+        isLoggedIn.value = true
+    }
 
     const userBooks = ref<Book[]>([])
 
@@ -41,6 +46,6 @@ export const useBookChatStore = defineStore('bookChat', () => {
         currentMessage.value = val
     }
 
-    return {user, currentBookChat, userBooks, currentBookChatID, currentMessage, messages,
-            setCurrentBookChat, setCurrentMessage, setMessages, pushMessage}
+    return {user, currentBookChat, userBooks, currentBookChatID, currentMessage, messages, isLoggedIn,
+            setCurrentBookChat, setCurrentMessage, setMessages, pushMessage, login}
   })

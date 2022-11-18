@@ -3,13 +3,17 @@ import { useBookChatStore } from '../../store'
 
 const store = useBookChatStore()
 
+const selectBookChat = (event: MouseEvent) => {
+    store.setCurrentBookChat((event.target as HTMLElement).innerHTML)
+}
+
 </script>
 
 <template>
   <div class="side-bar">
     <div class="book-section"
      v-for="book in store.userBooks"
-     @click="$emit('book-chat-select', $event)">
+     @click="selectBookChat">
      {{book.title}}
     </div>
   </div>

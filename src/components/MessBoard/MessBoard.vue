@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { useBookChatStore } from '../../store'
 import { ref, watch, onMounted } from 'vue'
+import { useBookChatStore } from '../../store'
+import { getFormattedDate } from '../../utils'
+import { Timestamp } from '@firebase/firestore'
 import fetchUserBooks from '../../firebase/fetch-functions/fetchUserBooks'
-import {getFormattedDate} from '../../utils'
 import fetchMessages from '../../firebase/fetch-functions/fetchMessages'
 import postMessage from '../../firebase/create-functions/postMessage'
 import onMessageAdded from '../../firebase/listener-functions/onMessageAdded'
-import { Timestamp } from '@firebase/firestore'
 
 let unsubscribe: Function
 
