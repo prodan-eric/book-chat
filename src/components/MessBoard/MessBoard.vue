@@ -6,6 +6,7 @@ import { Timestamp } from '@firebase/firestore'
 import fetchUserBooks from '../../firebase/fetch-functions/fetchUserBooks'
 import fetchMessages from '../../firebase/fetch-functions/fetchMessages'
 import postMessage from '../../firebase/create-functions/postMessage'
+import setCurrentBookChat from '../../firebase/set-functions/setCurrentBookChat'
 import onMessageAdded from '../../firebase/listener-functions/onMessageAdded'
 
 let unsubscribe: Function
@@ -28,6 +29,7 @@ onMounted(async ()=>{
 watch(()=>store.currentBookChat, async ()=>{    
    if(unsubscribe) unsubscribe()
    store.messages = await fetchMessages()
+   setCurrentBookChat()
    scrollToBottom()
 })
 

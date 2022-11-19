@@ -9,6 +9,7 @@ export default async () => {
     const docSnap = await getDoc(docRef)
     if (docSnap.exists()) {
       store.setUsername(docSnap.data().username)
+      store.setUserCurrentBookChat(docSnap.data().currentBookChat)
     } else {
       console.log("No such user.")
     }
