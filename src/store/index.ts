@@ -5,9 +5,13 @@ import {computed, ref} from 'vue'
 export const useBookChatStore = defineStore('bookChat', () => {
     const user = ref<User>({
         id: '',
-        username: 'ieronim',
-        currentBookChat: 'Ulysses'
+        username: '',
+        currentBookChat: 'The Waves'
     })
+
+    const setUsername = (val: string) =>{
+        user.value.username = val
+    }
 
     const isLoggedIn = ref(false)
 
@@ -47,5 +51,5 @@ export const useBookChatStore = defineStore('bookChat', () => {
     }
 
     return {user, currentBookChat, userBooks, currentBookChatID, currentMessage, messages, isLoggedIn,
-            setCurrentBookChat, setCurrentMessage, setMessages, pushMessage, login}
+            setCurrentBookChat, setCurrentMessage, setMessages, pushMessage, login, setUsername}
   })

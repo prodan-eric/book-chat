@@ -20,13 +20,14 @@ onMounted(async ()=>{
     if(store.user) {
         store.userBooks = await fetchUserBooks()
         store.setCurrentBookChat(store.user.currentBookChat)
+        console.log(store.user.username)
     }
+    unsubscribe =  await onMessageAdded()
 })
 
-watch(()=>store.currentBookChat, async ()=>{
+watch(()=>store.currentBookChat, async ()=>{    
    if(unsubscribe) unsubscribe()
    store.messages = await fetchMessages()
-   unsubscribe =  await onMessageAdded()
    scrollToBottom()
 })
 

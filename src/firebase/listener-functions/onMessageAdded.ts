@@ -9,6 +9,7 @@ export default async () =>{
     return onSnapshot(q, (querySnapshot) => {
        querySnapshot.forEach((doc)=>{
           const docData = doc.data()
+          console.log(`sentby ${docData.sentBy} at current user ${store.user.username}`)
           if(docData.sentBy===store.user.username) return
           store.pushMessage({
             text: docData.text,

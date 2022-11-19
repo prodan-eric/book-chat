@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import loginUser from '../firebase/auth-functions/loginUser'
+import fetchUsername from '../firebase/fetch-functions/fetchUsername';
 import { useRouter } from 'vue-router';
 
 const email = ref()
@@ -9,6 +10,7 @@ const router = useRouter()
 
 const attemptLogin = async () =>{
   await loginUser(email.value, password.value)
+  await fetchUsername()
   router.push({ path: '/chat' })
 }
 </script>
