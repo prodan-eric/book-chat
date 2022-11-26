@@ -1,0 +1,19 @@
+@import './generalStyles.css';
+.side-bar{
+    border-radius: 5px;
+    border-color: black;
+    border-width: 0px;
+}
+
+.side-bar-section{
+    padding: 20px 5px;
+ }
+ .side-bar-section:hover{
+     background-color: lightblue;
+     cursor: pointer;
+ }
+
+ .search-book {
+    margin: 20px 0px;
+    
+ }

@@ -2,13 +2,17 @@
 import SideBar from './SideBar/SideBar.vue'
 import MessBoard from './MessBoard/MessBoard.vue'
 import { useBookChatStore } from '../store'
+import UserPanel from './User/UserPanel.vue';
 const store = useBookChatStore()
 </script>
 
 <template>
     <div class="chat-app" v-if="store.isLoggedIn">
-        <SideBar/>
-        <MessBoard/>
+        <div class="left-side">
+            <SideBar/>
+            <MessBoard/>
+        </div>
+        <UserPanel/>
     </div> 
     <div class="link-wrapper" v-else>
         <router-link class="link" to="/">Sign In First</router-link>
@@ -18,6 +22,12 @@ const store = useBookChatStore()
 <style scoped>
 .chat-app{
     display: flex;
+    justify-content: space-between;
+}
+
+.left-side{
+    display: flex;
+    flex-grow: 1;
 }
 
 .link-wrapper{

@@ -43,6 +43,12 @@ const addMesssage = () => {
     store.setCurrentMessage('')
 }
 
+const handleScroll = () => {
+   if(messagesEl.value?.scrollTop===0){
+    console.log('loading new messages...');
+   }
+}
+
 </script>
 
 <template>
@@ -50,9 +56,9 @@ const addMesssage = () => {
         <div class="board-top-bar">
           {{store.currentBookChat}}
         </div>
-        <div class="messages" ref="messagesEl">
+        <div class="messages" ref="messagesEl" @scroll="handleScroll">
           <!-- this is one message -->
-           <div class="message" v-for="message in store.messages">
+           <div class="message" v-for="message in store.messages" style="padding-left:20px">
             <div class="top-bar">
                  <p class="sent-by">{{message.sentBy}}</p>
                  <p class="sent-at">{{getFormattedDate(message.sentAt)}}</p>
@@ -75,8 +81,8 @@ const addMesssage = () => {
 .board-top-bar{
     text-align: center;
     font-family: monospace;
-    outline: solid black 1px;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 .sent-by{
@@ -103,25 +109,31 @@ const addMesssage = () => {
 
 .messages{
     margin-top: 10px;
-    height: 400px;
+    flex-grow: 0.8;
     overflow: auto;
 }
 .messsage{
-    border-radius: 5px;
+    padding-left: 10px;
 }
 .message:hover{
   background-color: lightgray;
 }
 
 .message-board{
-   height: 500px; 
-   width: 100%;
+   height: 800px; 
+   flex-grow: 0.7;
+   margin: 0px 30px;
+   outline: 1px solid gray;
+   border-radius: 5px;
+   padding: 5px 0px 2px;
    position: relative;
-   display: grid;
+   display: flex;
+   flex-direction: column;
    justify-content: center;
 }
 
 .typing-box{
+    margin-top: 20px;
     bottom: 10px;
 }
 
@@ -130,7 +142,21 @@ const addMesssage = () => {
 }
 
 .message-input{
+    padding: 0px 10px 0px;
     width: 450px;
     border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: lightgray;
+  border-radius: 10px;
 }
 </style>

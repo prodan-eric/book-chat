@@ -11,7 +11,11 @@ const selectBookChat = (event: MouseEvent) => {
 
 <template>
   <div class="side-bar">
-    <div class="book-section"
+    <div class="search-book">
+      <input type="text" placeholder="Find book..."/>
+    </div>
+
+    <div class="side-bar-section"
      v-for="book in store.userBooks"
      @click="selectBookChat">
      {{book.title}}
@@ -19,18 +23,4 @@ const selectBookChat = (event: MouseEvent) => {
   </div>
 </template>
 
-<style>
-.book-section{
-   padding: 20px 5px;
-   width: 120px;
-}
-.book-section:hover{
-    background-color: lightblue;
-    cursor: pointer;
-}
-.side-bar{
-    border-radius: 5px;
-    border-color: black;
-    border-width: 0px;
-}
-</style>
+<style src="../../assets/sideBarStyles.css"/>
