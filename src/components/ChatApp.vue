@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import SideBar from './SideBar/SideBar.vue'
 import MessBoard from './MessBoard/MessBoard.vue'
+import UserPanel from './User/UserPanel.vue'
 import { useBookChatStore } from '../store'
-import UserPanel from './User/UserPanel.vue';
 const store = useBookChatStore()
 </script>
 

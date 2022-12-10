@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useBookChatStore } from '../../store'
+import SearchBook from './SearchBook.vue';
 
 const store = useBookChatStore()
 
@@ -11,10 +12,7 @@ const selectBookChat = (event: MouseEvent) => {
 
 <template>
   <div class="side-bar">
-    <div class="search-book">
-      <input type="text" placeholder="Find book..."/>
-    </div>
-
+    <SearchBook/>
     <div class="side-bar-section"
      v-for="book in store.userBooks"
      @click="selectBookChat">

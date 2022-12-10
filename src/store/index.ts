@@ -13,8 +13,7 @@ export const useBookChatStore = defineStore('bookChat', () => {
 
     const user = ref<User>({
         id: localUser.value ? localUser.value.uid : '',
-        username: localUser.value ? localUser.value.displayName
-         : '',
+        username: localUser.value ? localUser.value.displayName : '',
         currentBookChat: ''
     })
 
@@ -64,6 +63,7 @@ export const useBookChatStore = defineStore('bookChat', () => {
            isLoggedIn,
            firebaseUserObj,
            currentPfp,
+           localUser,
             setCurrentBookChat,
             setCurrentMessage,
             setMessages,
