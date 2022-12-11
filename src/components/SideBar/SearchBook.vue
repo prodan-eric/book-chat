@@ -1,9 +1,14 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import fetchBooks from '../../firebase/fetch-functions/fetchBooks'
+import fetchBook from '../../firebase/fetch-functions/fetchBook'
+import addUserBook from '../../firebase/create-functions/addUserBook'
+import { useBookChatStore } from '../../store'
 
 const searchBook = ref<string>('')
 const searchBooks = ref<string[]>([])
+const selectedBook = ref<string>('')
+const dialogRef = ref<HTMLDialogElement>()
 
 watch(searchBook, async (value)=>{
     if(value.length>2){ 
@@ -12,6 +17,19 @@ watch(searchBook, async (value)=>{
         searchBooks.value = []
     }
 })
+
+const addNewBook = async (book: string) => {
+  const dbBook = await fetchBook(book)
+  dialogRef.value?.close()
+  console.log(dbBook)
+  addUserBook(dbBook)
+}
+
+const openDialog = (book: string) => {
+   selectedBook.value = book;
+   dialogRef.value?.showModal()
+}
+const closeDialog = () => dialogRef.value?.close()
 </script>
 
 <template>
@@ -21,10 +39,20 @@ watch(searchBook, async (value)=>{
     <div class="searched-books" v-if="searchBook">
       <span v-if="searchBooks.length">Books Found:</span>
       <span v-else>Looking for books...</span>
-       <div class="searched-book" v-if="searchBooks" v-for="book in searchBooks">
+       <div class="searched-book" 
+             v-if="searchBooks" 
+             v-for="book in searchBooks"
+             @click="openDialog(book)">
           {{book}}
        </div>
     </div>
+    <dialog ref="dialogRef">
+        <p>Would you like to join the "{{selectedBook}}" chat?</p>
+        <div style="display: flex; justify-content:space-between">
+            <button @click="closeDialog">No</button>
+            <button @click="addNewBook(selectedBook)">Yes</button>
+        </div>
+    </dialog>
 </template>
 
 <style>
@@ -38,6 +66,18 @@ watch(searchBook, async (value)=>{
 .searched-book{
     font-family: monospace;
     margin-top: 5px;
+    cursor: pointer;
+    outline: 1px solid gray;
+    padding: 5px;
+}
+
+dialog {
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+dialog button {
+    padding: 0px 15px;
 }
 
 span{

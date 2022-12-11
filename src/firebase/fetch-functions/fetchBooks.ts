@@ -12,6 +12,6 @@ export default  async  (bookTitle: string) => {
       const bookData = doc.data()
       books.push(bookData.title)
     })
-    
+
     return books
 }

@@ -52,7 +52,7 @@ const handleScroll = () => {
 </script>
 
 <template>
-    <div class="message-board">
+    <div class="message-board" v-if="store.currentBookChat">
         <div class="board-top-bar">
           {{store.currentBookChat}}
         </div>
@@ -74,6 +74,9 @@ const handleScroll = () => {
                  v-model="store.currentMessage"
                  :placeholder="`type something, ${store.user.username}`"/>
         </form>
+    </div>
+    <div class="messages-placeholder message-board" v-else>
+         <p style="text-align: center">Join a book chat...</p>
     </div>
 </template>
 

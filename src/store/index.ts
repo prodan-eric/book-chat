@@ -33,6 +33,10 @@ export const useBookChatStore = defineStore('bookChat', () => {
     const setCurrentPfp = (val: string) => currentPfp.value = val
 
     const userBooks = ref<Book[]>([])
+    const addUserBook = (book: Book) => {
+      userBooks.value.push(book)
+    }
+
     const messages  = ref<Message[]>([])
 
     const currentBookChatID = computed(()=>{
@@ -73,5 +77,6 @@ export const useBookChatStore = defineStore('bookChat', () => {
             setUserCurrentBookChat, 
             setUserID,
             setFirebaseUserObj,
-            setCurrentPfp}
+            setCurrentPfp,
+            addUserBook}
   })

@@ -6,7 +6,7 @@ import { useBookChatStore } from "../../store"
 export default async () => {
     const store = useBookChatStore()
 
-    const q = query(collection(db, `chats/${store.currentBookChatID}/messages`), orderBy('sentAt', 'desc') ,limit(10))
+    const q = query(collection(db, `chats/${store.currentBookChatID}/messages`), orderBy('sentAt', 'desc'), limit(10))
     const querySnapshot = await getDocs(q)
     let messages: Message[] = []
     querySnapshot.forEach((doc) => {
