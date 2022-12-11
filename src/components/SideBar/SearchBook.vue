@@ -5,6 +5,8 @@ import fetchBook from '../../firebase/fetch-functions/fetchBook'
 import addUserBook from '../../firebase/create-functions/addUserBook'
 import { useBookChatStore } from '../../store'
 
+const store = useBookChatStore()
+
 const searchBook = ref<string>('')
 const searchBooks = ref<string[]>([])
 const selectedBook = ref<string>('')
@@ -23,6 +25,7 @@ const addNewBook = async (book: string) => {
   dialogRef.value?.close()
   console.log(dbBook)
   addUserBook(dbBook)
+  store.addUserBook(dbBook)
 }
 
 const openDialog = (book: string) => {
