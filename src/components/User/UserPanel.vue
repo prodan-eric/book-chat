@@ -9,6 +9,7 @@ const store = useBookChatStore()
        <p>Logged In as:</p>
        <p>{{store.user.username}}</p>
        <router-link class="link" to="edit-user-profile">Edit Profile</router-link>
+       <router-link class="link log-out" to="/" @click="store.logOut">Log Out</router-link>
      </div>
 </template>
 
@@ -28,6 +29,10 @@ const store = useBookChatStore()
 }
 .link:hover{
   background-color: lightgray;
+}
+
+.log-out{
+  margin-top: 10px;
 }
 
 img{

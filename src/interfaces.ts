@@ -23,3 +23,10 @@ export interface Message {
   sentBy: string,
   sentAt: Timestamp
 }
+
+export interface BookForm {
+  author: string,
+  title: string,
+  language: string,
+  isbn: string
+}

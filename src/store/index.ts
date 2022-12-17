@@ -26,6 +26,11 @@ export const useBookChatStore = defineStore('bookChat', () => {
 
     const isLoggedIn = ref(true)
     const login = () => isLoggedIn.value = true
+    const logOut = () => {
+        isLoggedIn.value = false;
+        window.localStorage.clear()
+    }
+
     const currentPfp = ref(
         localUser.value ? 
         localUser.value.photoURL : 'https://cdn3.vectorstock.com/i/thumb-large/32/12/default-avatar-profile-icon-vector-39013212.jpg'
@@ -58,25 +63,28 @@ export const useBookChatStore = defineStore('bookChat', () => {
     const setCurrentMessage = (val: string) => currentMessage.value = val
 
 
-    return {user,
-           currentBookChat,
-           userBooks,
-           currentBookChatID,
-           currentMessage,
-           messages,
-           isLoggedIn,
-           firebaseUserObj,
-           currentPfp,
-           localUser,
-            setCurrentBookChat,
-            setCurrentMessage,
-            setMessages,
-            pushMessage,
-            login,
-            setUsername,
-            setUserCurrentBookChat, 
-            setUserID,
-            setFirebaseUserObj,
-            setCurrentPfp,
-            addUserBook}
+    return {
+            user,
+            currentBookChat,
+            userBooks,
+            currentBookChatID,
+            currentMessage,
+            messages,
+            isLoggedIn,
+            firebaseUserObj,
+            currentPfp,
+            localUser,
+             setCurrentBookChat,
+             setCurrentMessage,
+             setMessages,
+             pushMessage,
+             login,
+             logOut,
+             setUsername,
+             setUserCurrentBookChat, 
+             setUserID,
+             setFirebaseUserObj,
+             setCurrentPfp,
+             addUserBook
+        }
   })

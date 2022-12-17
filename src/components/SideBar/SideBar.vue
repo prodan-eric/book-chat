@@ -1,12 +1,19 @@
 <script lang="ts" setup>
+import { ref } from 'vue';
 import { useBookChatStore } from '../../store'
 import SearchBook from './SearchBook.vue';
+import AddBook from './AddBook.vue'
 
 const store = useBookChatStore()
+const dialogRef = ref<HTMLDialogElement>()
 
 const selectBookChat = (event: MouseEvent) => {
     store.setCurrentBookChat((event.target as HTMLElement).innerHTML)
 }
+
+const openDialog = () => dialogRef.value?.showModal()
+
+const closeDialog = () => dialogRef.value?.close()
 
 </script>
 
@@ -18,7 +25,30 @@ const selectBookChat = (event: MouseEvent) => {
      @click="selectBookChat">
      {{book.title}}
     </div>
+    <div 
+      class="side-bar-section add-book"
+      @click="openDialog"
+      >
+      <img class="plus-img" src="plus.svg">
+      Create New Chat
+    </div>
   </div>
+  <dialog ref="dialogRef">
+   <AddBook
+   @close="closeDialog"/>
+  </dialog>
 </template>
 
-<style src="../../assets/sideBarStyles.css"/>
+<style>
+@import '../../assets/sideBarStyles.css';
+.plus-img{
+  width: 30px;
+  height: 30px;
+}
+
+.add-book{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+</style>

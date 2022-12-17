@@ -3,9 +3,6 @@ import { ref, watch } from 'vue'
 import fetchBooks from '../../firebase/fetch-functions/fetchBooks'
 import fetchBook from '../../firebase/fetch-functions/fetchBook'
 import addUserBook from '../../firebase/create-functions/addUserBook'
-import { useBookChatStore } from '../../store'
-
-const store = useBookChatStore()
 
 const searchBook = ref<string>('')
 const searchBooks = ref<string[]>([])
@@ -13,23 +10,23 @@ const selectedBook = ref<string>('')
 const dialogRef = ref<HTMLDialogElement>()
 
 watch(searchBook, async (value)=>{
-    if(value.length>2){ 
-        searchBooks.value = await fetchBooks(value)
-    } else {
-        searchBooks.value = []
-    }
+    if(value.length<2){ 
+        searchBooks.value = [] 
+        return 
+    } 
+    searchBooks.value = await fetchBooks(value)
 })
 
 const addNewBook = async (book: string) => {
   const dbBook = await fetchBook(book)
   dialogRef.value?.close()
-  console.log(dbBook)
-  addUserBook(dbBook)
-  store.addUserBook(dbBook)
+  await addUserBook(dbBook)   
+  searchBook.value = ''
+  window.location.reload()
 }
 
 const openDialog = (book: string) => {
-   selectedBook.value = book;
+   selectedBook.value = book
    dialogRef.value?.showModal()
 }
 const closeDialog = () => dialogRef.value?.close()
@@ -73,6 +70,10 @@ const closeDialog = () => dialogRef.value?.close()
     outline: 1px solid gray;
     padding: 5px;
 }
+.searched-book:hover{
+  background-color: lightblue;
+}
+
 
 dialog {
     transform: translate(-50%, -50%);
