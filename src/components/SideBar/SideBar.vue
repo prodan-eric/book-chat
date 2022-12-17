@@ -20,10 +20,10 @@ const closeDialog = () => dialogRef.value?.close()
 <template>
   <div class="side-bar">
     <SearchBook/>
-    <div class="side-bar-section"
+    <div class="side-bar-section book-section"
      v-for="book in store.userBooks"
      @click="selectBookChat">
-     {{book.title}}
+     {{book.title}} 
     </div>
     <div 
       class="side-bar-section add-book"
@@ -44,6 +44,11 @@ const closeDialog = () => dialogRef.value?.close()
 .plus-img{
   width: 30px;
   height: 30px;
+}
+
+.book-section{
+  display: flex;
+  justify-content: space-between;
 }
 
 .add-book{

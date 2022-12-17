@@ -8,11 +8,13 @@ import fetchMessages from '../../firebase/fetch-functions/fetchMessages'
 import postMessage from '../../firebase/create-functions/postMessage'
 import setCurrentBookChat from '../../firebase/set-functions/setCurrentBookChat'
 import onMessageAdded from '../../firebase/listener-functions/onMessageAdded'
+import removeUserBook from '../../firebase/remove-functions/removeUserBook'
 
 let unsubscribe: Function
 
 const store = useBookChatStore()
 const messagesEl = ref<HTMLElement>()
+const dialogRef = ref<HTMLDialogElement>()
 
 const scrollToBottom = () => messagesEl.value!.scrollTop = messagesEl.value!.scrollHeight
 
@@ -48,13 +50,23 @@ const handleScroll = () => {
     console.log('loading new messages...');
    }
 }
+const closeDialog = () => dialogRef.value?.close()
+const openDialog = () => dialogRef.value?.showModal()
+
+const leaveChat = () => {
+    removeUserBook()
+    closeDialog()  
+}
+
 
 </script>
 
 <template>
     <div class="message-board" v-if="store.currentBookChat">
         <div class="board-top-bar">
+          <p></p>
           {{store.currentBookChat}}
+          <img @click="openDialog" class="delete-img" src="delete.svg"/>
         </div>
         <div class="messages" ref="messagesEl" @scroll="handleScroll">
           <!-- this is one message -->
@@ -78,6 +90,14 @@ const handleScroll = () => {
     <div class="messages-placeholder message-board" v-else>
          <p style="text-align: center">Join a book chat...</p>
     </div>
+
+    <dialog ref="dialogRef">
+        <p>Do you want to leave the "{{store.currentBookChat}}" chat?</p>
+        <div style="display: flex; justify-content:space-between">
+            <button @click="closeDialog">No</button>
+            <button @click="leaveChat">Yes</button>
+        </div>
+    </dialog>
 </template>
 
 <style>
@@ -86,6 +106,9 @@ const handleScroll = () => {
     font-family: monospace;
     border-radius: 3px;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .sent-by{
@@ -149,6 +172,13 @@ const handleScroll = () => {
     width: 450px;
     border-radius: 10px;
 }
+
+.delete-img{
+  width: 10px;
+  height: 10px;
+  margin: 0px 20px;
+}
+
 
 ::-webkit-scrollbar {
   width: 5px;
