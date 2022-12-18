@@ -16,14 +16,30 @@ const attemptLogin = async () =>{
 </script>
 
 <template>
-  <form @submit.prevent="attemptLogin">
+  <div class="login-container">
+    <h2>Welcome to BookChat</h2>
+     <h3>Log In</h3>
+    <form @submit.prevent="attemptLogin">
      <input placeholder="E-Mail" v-model="email"/>
-     <input placeholder="Password" v-model="password"/>
+     <input type="password" placeholder="Password" v-model="password"/>
      <input type="submit" value="Log In"/>
-     <router-link to="/register" class="link">Create Account</router-link>
-  </form>
+    </form>
+    <h3>Or</h3>
+    <router-link to="/register" class="link">Create an Account</router-link>
+    <img class="book-img" src='open_book.svg'/>
+  </div>
 </template>
 
 <style>
 @import '../assets/formStyles.css';
+h2, h3{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.book-img{
+  margin-left: 40px;
+  margin-top: 200px;
+  width: 500px;
+  height: 200px;
+}
 </style>

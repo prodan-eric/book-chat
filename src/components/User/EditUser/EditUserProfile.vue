@@ -26,7 +26,7 @@ const handleUpload = async () => {
         <div class="options">
             <h3>Update Your Profile</h3>
             <div class='update-username'>
-               <input placeholder='New Username' type='text'>
+               <input class="new-username" placeholder='New Username' type='text'>
                <button>Update</button>
             </div>
 
@@ -43,7 +43,12 @@ const handleUpload = async () => {
 </template>
 
 <style scoped>
-
+.options{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .editor{
     display: flex;
     justify-content: space-evenly;
@@ -61,6 +66,15 @@ button:hover{
 .update-pfp{
     display: flex;
     flex-direction: column;  
+    align-items: center;
+}
+input[type="file"]{
+  margin-top: 20px;
+  margin-left: 100px;
+}
+
+.new-username {
+  margin-bottom: 30px;
 }
 
 img{

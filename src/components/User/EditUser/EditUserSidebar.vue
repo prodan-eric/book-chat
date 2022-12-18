@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="side-bar">
+    <div class="side-bar" style="width: 100px;margin-top: 70px;">
        <router-link to="/chat" class="side-bar-section">
         <img src="back.svg" class="small-icon" alt="back">
        </router-link>

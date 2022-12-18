@@ -1,9 +1,9 @@
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import postUser from '../create-functions/postUser'
 
-export default (email: string, username: string, password: string) => {
+export default async (email: string, username: string, password: string) => {
     const auth = getAuth()   
-    createUserWithEmailAndPassword(auth, email, password)
+    return createUserWithEmailAndPassword(auth, email, password)
      .then((userCredential) => {
       const user = userCredential.user
       updateProfile(user, {
@@ -12,9 +12,6 @@ export default (email: string, username: string, password: string) => {
       postUser(username, user.uid)
     })
     .catch((error) => {
-    const errorCode = error.code
-    const errorMessage = error.message
-    console.log(`Error code: ${errorCode}`)
-    console.log(`Error : ${errorMessage}`);
-    });
+      return error.code
+    })
 }

@@ -6,19 +6,32 @@ const username = ref()
 const password = ref()
 const email = ref()
 
-const attemptRegister = () =>{
-  createUser(email.value, username.value, password.value)
+const error = ref()
+const registered = ref(false)
+
+const attemptRegister = async () =>{
+  error.value = await createUser(email.value, username.value, password.value)
+  if(error.value==undefined) {
+    error.value = ''
+    registered.value = true
+  } 
 }
 </script>
 
 <template>
-  <form @submit.prevent="attemptRegister">
+  <div class="login-container">
+    <h3>Create Your Account</h3>
+    <form @submit.prevent="attemptRegister">
      <input placeholder="E-Mail" v-model="email"/>
      <input placeholder="Username" v-model="username"/>
-     <input placeholder="Password" v-model="password"/>
+     <input type="password" placeholder="Password" v-model="password"/>
      <input type="submit" value="Register"/>
-     <router-link to="/" class="link">Sign In</router-link>
-  </form>
+     <p v-if="error" style="color:red">{{error}}</p>
+     <p v-else-if="registered">Account registered, you can sign in now.</p>
+    </form>
+    <h3>Or</h3>
+    <router-link to="/" class="link">Sign In</router-link>
+  </div>
 </template>
 
 <style>
