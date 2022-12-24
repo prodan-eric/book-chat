@@ -9,7 +9,7 @@
     padding: 20px 5px;
  }
  .side-bar-section:hover{
-     background-color: lightblue;
+     background-color: var(--background-fill-color-darker);
      cursor: pointer;
  }
 

@@ -15,6 +15,7 @@ const submitForm = () => addBook(form.value)
 
 <template>
   <div class="book-form">
+    <h3>Create a new book chat</h3>
     <form @submit.prevent="submitForm">
     <label for="author">Author:</label>
     <input type="text" v-model="form.author" id="author" required>
@@ -25,7 +26,7 @@ const submitForm = () => addBook(form.value)
     <label for="isbn">ISBN:</label>
     <input type="text" v-model="form.isbn" id="isbn" required>
     
-    <button type="submit">Add Book</button> 
+    <button type="submit">Add Chat</button> 
     <button @click="$emit('close')" style="margin-top:15px">Cancel</button>
   </form>
   </div>

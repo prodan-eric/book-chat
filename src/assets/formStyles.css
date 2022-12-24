@@ -19,7 +19,7 @@ label:hover{
   text-decoration: none;
   text-align: center;
   font-size: 20px; 
-  color: rgb(44, 105, 125); 
+  color: var(--text-color); 
 }
 .link:hover{
    text-decoration: underline;

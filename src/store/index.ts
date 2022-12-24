@@ -14,12 +14,16 @@ export const useBookChatStore = defineStore('bookChat', () => {
     const user = ref<User>({
         id: localUser.value ? localUser.value.uid : '',
         username: localUser.value ? localUser.value.displayName : '',
-        currentBookChat: ''
+        currentBookChat: '',
     })
 
     const setUsername = (val: string) => user.value.username = val
     const setUserID = (val: string) => user.value.id = val
     const setUserCurrentBookChat = (val: string) =>  user.value.currentBookChat = val
+    const setUserCurrentTheme = (val: string|null) => {
+        window.localStorage.setItem('theme', val||'light')
+        document.documentElement.setAttribute('theme', val||'')
+    }
 
     const firebaseUserObj = ref<FirebaseUser>()
     const setFirebaseUserObj = (val: FirebaseUser) => firebaseUserObj.value = val
@@ -85,6 +89,7 @@ export const useBookChatStore = defineStore('bookChat', () => {
              setUserID,
              setFirebaseUserObj,
              setCurrentPfp,
-             addUserBook
+             addUserBook,
+             setUserCurrentTheme
         }
   })

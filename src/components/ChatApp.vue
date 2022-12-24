@@ -3,7 +3,12 @@ import SideBar from './SideBar/SideBar.vue'
 import MessBoard from './MessBoard/MessBoard.vue'
 import UserPanel from './User/UserPanel.vue'
 import { useBookChatStore } from '../store'
+import { onMounted } from 'vue';
 const store = useBookChatStore()
+
+onMounted(()=>{
+    store.setUserCurrentTheme(window.localStorage.getItem('theme'))
+})
 </script>
 
 <template>

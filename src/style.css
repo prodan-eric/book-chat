@@ -1,3 +1,29 @@
+:root {
+    --body-color: white;
+    --text-color: black;
+    --text-color-reverse: white;
+    --background-fill-color-darker: darkgray;
+    --background-fill-color-lighter: lightgray;
+    --message-input-color: white
+}
+
+[theme='dark']{
+    --body-color: black;
+    --text-color: white;
+    --text-color-reverse: black;
+    --background-fill-color-darker: darkgray;
+    --background-fill-color-lighter: lightgray;
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--body-color);
+    color: var(--text-color)
+}
+
+button {
+    background-color: var(--background-fill-color);
+}
+
+input::placeholder{
+    color: black;
 }

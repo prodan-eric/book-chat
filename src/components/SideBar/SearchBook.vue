@@ -34,7 +34,7 @@ const closeDialog = () => dialogRef.value?.close()
 
 <template>
     <div class="search-book">
-      <input v-model="searchBook" placeholder="Find book..."/>
+      <input style="width: 10vw" v-model="searchBook" placeholder="Find book..."/>
     </div>
     <div class="searched-books" v-if="searchBook">
       <span v-if="searchBooks.length">Books Found:</span>

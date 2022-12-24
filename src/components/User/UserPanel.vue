@@ -4,7 +4,7 @@ const store = useBookChatStore()
 </script>
 
 <template>
-     <div class="user-panel">
+     <div class="user-panel side-menu">
        <img :src="store.currentPfp"/>
        <p>Logged In as:</p>
        <p>{{store.user.username}}</p>
@@ -14,15 +14,16 @@ const store = useBookChatStore()
 </template>
 
 <style scoped>
+@import '../../assets/generalStyles.css';
 .user-panel{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .link{
   text-decoration: none;
-  color: black;
+  color: var(--text-color);
   outline: 2px solid gray;
   border-radius: 3px;
   padding: 5px;

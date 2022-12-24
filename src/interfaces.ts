@@ -15,7 +15,8 @@ export interface User {
 }
 
 export interface DbUser extends User {
-  books: DocumentReference<Book>[]
+  books: DocumentReference<Book>[],
+  currentTheme: string
 }
 
 export interface Message {

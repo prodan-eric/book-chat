@@ -142,12 +142,13 @@ const leaveChat = () => {
     padding-left: 10px;
 }
 .message:hover{
-  background-color: lightgray;
+  background-color: var(--background-fill-color-darker);
+  color: var(--text-color-reverse);
 }
 
 .message-board{
-   height: 800px; 
-   flex-grow: 0.7;
+   height: 95vh; 
+   flex-grow: 1;
    margin: 0px 30px;
    outline: 1px solid gray;
    border-radius: 5px;
@@ -165,6 +166,7 @@ const leaveChat = () => {
 
 .typing-box input{
     height: 40px;
+    background-color: var(--message-input-color);
 }
 
 .message-input{

@@ -10,6 +10,7 @@ export default async () => {
     if (docSnap.exists()) {
       store.setUsername(docSnap.data().username)
       store.setUserCurrentBookChat(docSnap.data().currentBookChat)
+      store.setUserCurrentTheme(docSnap.data().currentTheme)
     } else {
       console.log("No such user.")
     }

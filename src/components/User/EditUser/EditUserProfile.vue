@@ -54,9 +54,14 @@ const handleUpload = async () => {
     justify-content: space-evenly;
 }
 button{
+  background-color: var(--background-fill-color-lighter);
   margin: 0px 5px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+input{
+  background-color: var(--background-fill-color-lighter);
 }
 
 button:hover{
